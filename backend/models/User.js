@@ -17,10 +17,10 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Goal'
   },
-  monthlySpendings: [
+  trackers: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'MonthlySpending'
+      ref: 'MonthlyTracker'
     }
   ]
 })
