@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const config = require('./utils/config');
 const middleware = require('./utils/middleware');
 
-// const router = require('./controllers/router');
+const usersRouter = require('./controllers/users');
 
 const app = express();
 
@@ -32,7 +32,7 @@ app.get('/', (request, response) => {
 
 // route handlers
 
-// app.use('/api/router-address', router);
+app.use('/api/users', usersRouter);
 
 
 // public assets
