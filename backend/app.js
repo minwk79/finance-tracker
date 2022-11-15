@@ -7,6 +7,7 @@ const config = require('./utils/config');
 const middleware = require('./utils/middleware');
 
 const usersRouter = require('./controllers/users');
+const goalsRouter = require('./controllers/goals');
 
 const app = express();
 
@@ -25,14 +26,13 @@ app.use(cors());
 
 app.use(middleware.tokenExtractor);
 
-
 app.get('/', (request, response) => {
   response.send({ message: 'Hello from backend server!' });
 });
 
 // route handlers
-
 app.use('/api/users', usersRouter);
+app.use('/api/goals', goalsRouter);
 
 
 // public assets
