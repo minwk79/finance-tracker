@@ -5,11 +5,11 @@ const usersRouter = require('express').Router();
 const config = require('../utils/config');
 const bcrypt = require('bcrypt');
 
-// return a single user
+// return a single user by id
 usersRouter.get('/:userId', async (req, res, next) => {
   try {
     const { userId } = req.params;
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).populate();
     res.status(200).json(user);
   } catch (error) {
     next(error);
