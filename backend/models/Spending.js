@@ -23,6 +23,9 @@ const spendingSchema = new Schema({
   amount: {
     type: Number
   },
+  date: {
+    type: String  // format: 'yyyy-mm-dd'
+  },
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
