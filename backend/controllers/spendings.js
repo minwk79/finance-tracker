@@ -4,7 +4,7 @@ const User = require('../models/User');
 
 const spendingsRouter = require('express').Router();
 
-
+// return spending by id
 spendingsRouter.get('/:spendingId', async (req, res, next) => {
   try {
     const {spendingId} = req.params;
@@ -15,6 +15,7 @@ spendingsRouter.get('/:spendingId', async (req, res, next) => {
   }
 })
 
+// create new spending
 spendingsRouter.post('/', async (req, res, next) => {
   try {
     const {title, type, details, amount, user} = req.body;
@@ -60,6 +61,7 @@ spendingsRouter.post('/', async (req, res, next) => {
   }
 })
 
+// update spending
 spendingsRouter.patch('/:spendingId', async (req, res, next) => {
   try {
     const {spendingId} = req.params;
@@ -70,6 +72,7 @@ spendingsRouter.patch('/:spendingId', async (req, res, next) => {
   }
 })
 
+// delete spending 
 spendingsRouter.delete('/:spendingId', async (req, res, next) => {
   try {
     // identify the spending from one of the monthly trackers and delete
