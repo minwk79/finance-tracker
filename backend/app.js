@@ -8,6 +8,8 @@ const middleware = require('./utils/middleware');
 
 const usersRouter = require('./controllers/users');
 const goalsRouter = require('./controllers/goals');
+const spendingsRouter = require('./controllers/spendings');
+const monthlyTrackersRouter = require('./controllers/monthlyTrackers');
 
 const app = express();
 
@@ -33,6 +35,8 @@ app.get('/', (request, response) => {
 // route handlers
 app.use('/api/users', usersRouter);
 app.use('/api/goals', goalsRouter);
+app.use('/api/spendings', spendingsRouter);
+app.use('/api/trackers', monthlyTrackersRouter);
 
 
 // public assets
