@@ -11,6 +11,7 @@ const goalsRouter = require('./controllers/goals');
 const spendingsRouter = require('./controllers/spendings');
 const monthlyTrackersRouter = require('./controllers/monthlyTrackers');
 const loginRouter = require('./controllers/login');
+const registerRouter = require('./controllers/register');
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use('/api/goals', goalsRouter);
 app.use('/api/spendings', spendingsRouter);
 app.use('/api/trackers', monthlyTrackersRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/register', registerRouter);
 
 
 // public assets
