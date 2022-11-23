@@ -1,0 +1,54 @@
+header {
+  background: #efefef;
+  margin: 1rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+main {
+  padding: 2rem;
+  border: 2px solid black;
+}
+
+.appText {
+  grid-area: text;
+  background: #efdfde;
+}
+
+.appExample {
+  grid-area: example;
+  background-color: #ddefdd;
+}
+
+.signupForm {
+  grid-area: form;
+  background-color: #bbaacc;
+}
+
+.header-text {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  display: inline-block;
+  line-height: 1.2;
+}
+
+.subheader-text {
+  font-size: 1.5rem;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "text example"
+    "text example"
+    "form example";
+}
+
+img {
+  width: 25rem;
+  height: 25rem;
+}

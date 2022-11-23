@@ -1,0 +1,28 @@
+<header>
+  <app-logo></app-logo>
+  <button mat-raised-button color="primary">Sign in</button>
+</header>
+
+<main>
+  <section class="container">
+    <div class="appText">
+      <div class="header-text">Big Header Explaining the App</div>
+      <div class="subheader-text">Smaller Text to Explain Further in Details</div>
+    </div>
+
+    <aside class="appExample">
+      <img src="https://images.unsplash.com/photo-1543286386-713bdd548da4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="chart">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem dolore eaque, doloremque facilis neque, minus maiores asperiores aspernatur facere molestias, delectus incidunt pariatur culpa assumenda magnam nostrum distinctio dicta atque!</p>
+    </aside>
+
+    <form class="signupForm" [formGroup]="signupForm" (ngSubmit)="generateEmail()">
+      <div>
+        <label for="signupEmail"><h2>Start using tracker now!</h2></label>
+      </div>
+      <input type="email" id="signupEmail" name="signupEmail" formControlName="signupEmail" required>
+      <button mat-raised-button color="primary">Sign up Now!</button>
+    </form>
+  </section>
+</main>
+
+<app-footer></app-footer>
