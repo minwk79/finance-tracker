@@ -9,7 +9,7 @@ registerRouter.post('/', async (req, res, next) => {
 
   // construct a jwt
   const token = jwt.sign({email}, config.JWT_KEY, {expiresIn: '3h'});
-
+  
   // send email
   sendMail({email, token}, (info) => {
     console.log(`The mail has beed sent 😃 and the id is ${info.messageId}`);
@@ -39,8 +39,8 @@ async function sendMail(body, callback) {
   let mailOptions = {
     from: 'myTracker', // sender address
     to: `${body.email}`, // list of receivers
-    subject: "Wellcome to Beconfire 👻", // Subject line
-    html: `<h1>Hello, welcome to myTracker!</h1><br>
+    subject: "Wellcome to myTracker 👻", // Subject line
+    html: `<h1>Hello new user</h1><br>
     <h4>Thanks for giving this app a try</h4>
     <h4>Click the link below to register!</h4>
     <a href="http://localhost:4200/register/${body.token}">Click</a>
