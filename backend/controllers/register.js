@@ -41,9 +41,9 @@ async function sendMail(body, callback) {
     to: `${body.email}`, // list of receivers
     subject: "Wellcome to myTracker 👻", // Subject line
     html: `<h1>Hello new user</h1><br>
-    <h4>Thanks for giving this app a try</h4>
-    <h4>Click the link below to register!</h4>
-    <a href="http://localhost:4200/register/${body.token}">Click</a>
+    <h4>Thanks for trying myTracker!</h4>
+    <h4>Click the link below to signup.</h4>
+    <a href="http://localhost:4200/signup/${body.token}">Click</a>
     `
   };
 
