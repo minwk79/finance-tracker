@@ -1,0 +1,11 @@
+<form>
+  <label for="username">Username: </label>
+  <input type="text" id="username" name="username" [(ngModel)]="personalDetails.username" >
+
+  <label for="email">Email: </label>
+  <input type="text" id="email" name="email" [placeholder]="email" readonly >
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" [(ngModel)]="personalDetails.password">
+  <button type="button" (click)="handleClick()">Next</button>
+</form>
