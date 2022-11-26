@@ -1,0 +1,35 @@
+<p>sign-up-page works!</p>
+
+<div *ngIf="!tokenValid; else elseBlock">
+  <div class="expired">
+    <h2>Token is Expired!</h2>
+    <p>Please go back to our main page and resubmit your email.</p>
+    <button routerLink="/main">Go Main</button>
+  </div>
+</div>
+
+<ng-template #elseBlock>
+  <div class="stepper">
+    <div class="stepInfo">
+      <div *ngIf="signupService.selected === 1; else elseBlock">
+        <h3>Step 1</h3>
+        <p>Enter your personal information here.</p>
+      </div>
+      <ng-template #elseBlock>
+        <h3>Step 2</h3>
+        <p>Start thinking about your monthly/weekly goals!</p>
+      </ng-template>
+    </div>
+    <hr>
+    <div class="steps">
+      <div class="step">
+        <p><span [ngClass]="signupService.selected === 1 ? 'selected' : ''" class="stepNumber">1</span>Personal Information</p>
+      </div>
+      <div class="vertical-line"></div>
+      <div class="step">
+        <p><span [ngClass]="signupService.selected === 2 ? 'selected' : ''" class="stepNumber">2</span>Set your Goals</p>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</ng-template>
