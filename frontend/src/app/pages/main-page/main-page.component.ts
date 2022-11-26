@@ -26,7 +26,11 @@ export class MainPageComponent implements OnInit {
     this.registerService.register({email}).subscribe((res: any) => {
         window.alert(`Registration email has been sent to ${email}`);
     })
+    // console.log('setting email in local storage', email);
+    window.localStorage.setItem('email', email || '');
     
     this.signupForm.reset();
   } 
 }
+
+// TODO: Work on Signin Page and styling previous pages (main, signup)..
