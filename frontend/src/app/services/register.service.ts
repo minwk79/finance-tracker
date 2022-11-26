@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class RegisterService {
   url = 'http://localhost:3000/api/register';
+  public token = '';
 
   constructor(private http: HttpClient) { }
 
