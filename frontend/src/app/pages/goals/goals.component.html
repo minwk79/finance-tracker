@@ -1,0 +1,10 @@
+<form (ngSubmit)="handleSubmit()">
+  <label for="monthly">Monthly Goal:</label>
+  <input type="number" id="monthly" name="monthly" [(ngModel)]="goalsDetails.monthly">
+
+  <label for="weekly">Weekly Goal:</label>
+  <input type="number" id="weekly" name="weekly" [(ngModel)]="goalsDetails.weekly">
+
+  <button type="button" (click)="handlePrevClick()">Prev</button>
+  <button type="submit">Submit</button>
+</form>
