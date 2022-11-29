@@ -1,0 +1,17 @@
+.header {
+  background: #efefef;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .right {
+    display: flex;
+    align-items: center;
+  }
+
+  .btn {
+    margin: 1rem;
+  }
+}
+
+

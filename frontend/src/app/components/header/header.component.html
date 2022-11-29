@@ -1,0 +1,17 @@
+<header class="header">
+  <div>
+    <ng-content></ng-content>
+  </div>
+  <div class="right">
+    <div *ngIf="showNavbar">
+      <app-navbar></app-navbar>
+    </div>
+    <div *ngIf="showSignin">
+      <button mat-raised-button class="btn" (click)="gotoSignIn()">Sign In</button>
+    </div>
+    <div *ngIf="showSignout">
+      <button mat-raised-button class="btn">Sign Out</button>
+      <!-- TODO: Logout user and remove from localStorage -->
+    </div>
+  </div>
+</header>
