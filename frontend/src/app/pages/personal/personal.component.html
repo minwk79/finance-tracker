@@ -1,11 +1,46 @@
-<form>
-  <label for="username">Username: </label>
-  <input type="text" id="username" name="username" [(ngModel)]="personalDetails.username" >
+<form [formGroup]="personalForm">
+  <mat-form-field>
+    <mat-label>Username:</mat-label>
+    <input matInput placeholder="Enter Username" type="text" id="username" name="username" [(ngModel)]="personalDetails.username" formControlName="usernameFormControl">
+    <mat-icon matSuffix></mat-icon>
+    <mat-error *ngIf="personalForm.get('usernameFormControl')?.hasError('required')">
+      Username is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
 
-  <label for="email">Email: </label>
-  <input type="text" id="email" name="email" [placeholder]="email" readonly >
+  <mat-form-field>
+    <mat-label>Email:</mat-label>
+    <input matInput disabled id="email" name="email" [value]="email">
+    <mat-icon matSuffix></mat-icon>
+  </mat-form-field>
 
-  <label for="password">Password:</label>
-  <input type="password" id="password" name="password" [(ngModel)]="personalDetails.password">
-  <button type="button" (click)="handleClick()">Next</button>
+  <mat-form-field>
+    <mat-label>Password:</mat-label>
+    <input matInput placeholder="Enter Password" [type]="hidwPW ? 'password' : 'text'" id="password" name="password" 
+      [(ngModel)]="personalDetails.password" formControlName="passwordFormControl">
+    <button mat-icon-button matSuffix (click)="hidwPW = !hidwPW" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidwPW">
+      <mat-icon>{{hidwPW ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="personalForm.get('passwordFormControl')?.hasError('required')">
+      Password is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="personalForm.get('passwordFormControl')?.hasError('minlength')">
+      Password must have at least <strong>4 characters</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Confirm Password:</mat-label>
+    <input matInput placeholder="Enter Password" [type]="hideConfirmPW ? 'password' : 'text'" id="confirm-password" name="confirm-password" 
+      [(ngModel)]="confirmPassword" formControlName="confirmFormControl" [errorStateMatcher]="matcher">
+    <button mat-icon-button matSuffix (click)="hideConfirmPW = !hideConfirmPW" [attr.aria-label]="'Hide Password'" [attr.aria-pressed]="hideConfirmPW">
+      <mat-icon>{{hideConfirmPW ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="personalForm.hasError('notSame')">
+      Password Do not Match!
+    </mat-error>
+  </mat-form-field>
+
 </form>
+
+<button mat-flat-button (click)="next()" [disabled]="confirmPassword === '' || personalDetails.password !== confirmPassword">Next</button>
