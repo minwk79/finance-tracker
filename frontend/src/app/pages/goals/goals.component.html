@@ -1,10 +1,24 @@
-<form (ngSubmit)="handleSubmit()">
-  <label for="monthly">Monthly Goal:</label>
-  <input type="number" id="monthly" name="monthly" [(ngModel)]="goalsDetails.monthly">
+<form [formGroup]="goalsForm">
+  <mat-form-field>
+    <mat-label>Monthly Goal:</mat-label>
+    <input matInput type="number" placeholder="0" id="monthly" name="monthly"
+      [(ngModel)]="goalsDetails.monthly" formControlName="monthlyFormControl">
+    <span matPrefix>$&nbsp;</span>
+    <span matSuffix>.00</span>
+    <mat-error *ngIf="goalsForm.get('monthlyFormControl')?.hasError('required')">
+      Monthly Goal is <strong>Required</strong>
+    </mat-error>
+  </mat-form-field>
 
-  <label for="weekly">Weekly Goal:</label>
-  <input type="number" id="weekly" name="weekly" [(ngModel)]="goalsDetails.weekly">
+  <mat-form-field>
+    <mat-label>Weekly Goal:</mat-label>
+    <input matInput type="number" placeholder="0" id="weekly" name="weekly"
+      [(ngModel)]="goalsDetails.weekly" formControlName="weeklyFormControl">
+    <span matPrefix>$&nbsp;</span>
+    <span matSuffix>.00</span>
+  </mat-form-field>
 
-  <button type="button" (click)="handlePrevClick()">Prev</button>
-  <button type="submit">Submit</button>
 </form>
+
+<button mat-raised-button (click)="handleSubmit()" [disabled]="!goalsForm.valid">Submit</button>
+<button mat-flat-button (click)="handlePrevClick()">Prev</button>
