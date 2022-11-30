@@ -1,4 +1,6 @@
-<p>sign-up-page works!</p>
+<app-header>
+  <app-logo></app-logo>
+</app-header>
 
 <div *ngIf="!tokenValid; else elseBlock">
   <div class="expired">
@@ -9,27 +11,42 @@
 </div>
 
 <ng-template #elseBlock>
-  <div class="stepper">
-    <div class="stepInfo">
-      <div *ngIf="signupService.selected === 1; else elseBlock">
-        <h3>Step 1</h3>
-        <p>Enter your personal information here.</p>
+  <main class="wrapper">
+    <!-- Stepper -->
+    <ol class="stepper">
+      <li class="stepper-item">
+        <h3 class="stepper-title">Personal Info</h3>
+        <!-- <p class="stepper-text">Some desc text</p> -->
+      </li>
+      <li class="stepper-item">
+        <h3 class="stepper-title">Goals</h3>
+        <!-- <p class="stepper-text">Some desc text</p> -->
+      </li>
+    </ol>
+
+    <!-- <div class="stepper">
+      <div class="stepInfo">
+        <div *ngIf="signupService.selected === 1; else elseBlock">
+          <h3>Step 1</h3>
+          <p>Enter your personal information here.</p>
+        </div>
+        <ng-template #elseBlock>
+          <h3>Step 2</h3>
+          <p>Start thinking about your monthly/weekly goals!</p>
+        </ng-template>
       </div>
-      <ng-template #elseBlock>
-        <h3>Step 2</h3>
-        <p>Start thinking about your monthly/weekly goals!</p>
-      </ng-template>
-    </div>
-    <hr>
-    <div class="steps">
-      <div class="step">
-        <p><span [ngClass]="signupService.selected === 1 ? 'selected' : ''" class="stepNumber">1</span>Personal Information</p>
+      <hr>
+      <div class="steps">
+        <div class="step">
+          <p><span [ngClass]="signupService.selected === 1 ? 'selected' : ''" class="stepNumber">1</span>Personal Information</p>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="step">
+          <p><span [ngClass]="signupService.selected === 2 ? 'selected' : ''" class="stepNumber">2</span>Set your Goals</p>
+        </div>
       </div>
-      <div class="vertical-line"></div>
-      <div class="step">
-        <p><span [ngClass]="signupService.selected === 2 ? 'selected' : ''" class="stepNumber">2</span>Set your Goals</p>
-      </div>
-    </div>
-  </div>
-  <router-outlet></router-outlet>
+    </div> -->
+
+    <router-outlet></router-outlet>
+  </main>
 </ng-template>
