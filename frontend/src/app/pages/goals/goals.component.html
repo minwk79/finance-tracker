@@ -1,21 +1,27 @@
 <form [formGroup]="goalsForm">
   <mat-form-field>
     <mat-label>Monthly Goal:</mat-label>
-    <input matInput type="number" placeholder="0" id="monthly" name="monthly"
-      [(ngModel)]="goalsDetails.monthly" formControlName="monthlyFormControl">
+    <input matInput type="number" placeholder="0" id="monthly" name="monthly" formControlName="monthlyFormControl"
+      matTooltip="How much do you wish to spend within a Month?" matTooltipPosition="below" aria-label="Input Tooltip for Monthly Goal">
     <span matPrefix>$&nbsp;</span>
     <span matSuffix>.00</span>
     <mat-error *ngIf="goalsForm.get('monthlyFormControl')?.hasError('required')">
       Monthly Goal is <strong>Required</strong>
     </mat-error>
+    <mat-error *ngIf="goalsForm.get('monthlyFormControl')?.hasError('min')">
+      Please enter a positive value
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Weekly Goal:</mat-label>
-    <input matInput type="number" placeholder="0" id="weekly" name="weekly"
-      [(ngModel)]="goalsDetails.weekly" formControlName="weeklyFormControl">
+    <input matInput type="number" placeholder="0" id="weekly" name="weekly" formControlName="weeklyFormControl"
+      matTooltip="How much do you wish to spend within a Week?" matTooltipPosition="below" aria-label="Input Tooltip for Weekly Goal">
     <span matPrefix>$&nbsp;</span>
     <span matSuffix>.00</span>
+    <mat-error *ngIf="goalsForm.get('weeklyFormControl')?.hasError('min')">
+      Please enter a positive value
+    </mat-error>
   </mat-form-field>
 
 </form>

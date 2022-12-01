@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { GoalsDetails } from 'src/app/models/goals-details';
 import { SignUpService } from 'src/app/services/sign-up.service';
 import { RegisterService } from 'src/app/services/register.service';
 import { Router } from '@angular/router';
@@ -16,12 +15,13 @@ export class GoalsComponent implements OnInit {
   hide = true;
 
 
-  goalsDetails !: GoalsDetails;
   token !: string;
 
   goalsForm = new FormGroup({
-    monthlyFormControl: new FormControl(0, Validators.required),
-    weeklyFormControl: new FormControl(0)
+    monthlyFormControl: new FormControl(this.signupService.goalsDetails.monthly, [Validators.required, Validators.min(0)]),
+    weeklyFormControl: new FormControl(this.signupService.goalsDetails.weekly, Validators.min(0))
+    // monthlyFormControl: new FormControl(null, [Validators.required, Validators.min(0)]),
+    // weeklyFormControl: new FormControl(null, Validators.min(0))
   })
   
   constructor(
@@ -29,7 +29,6 @@ export class GoalsComponent implements OnInit {
     private registerService: RegisterService,
     private router: Router
   ) { 
-    this.goalsDetails = this.signupService.goalsDetails;
   }
 
   ngOnInit(): void {
@@ -37,14 +36,20 @@ export class GoalsComponent implements OnInit {
   }
 
   handlePrevClick() {
+    // TODO: Don't set the value if null;
+    this.signupService.goalsDetails.monthly = this.goalsForm.getRawValue().monthlyFormControl || 0;
+    this.signupService.goalsDetails.weekly = this.goalsForm.getRawValue().weeklyFormControl || 0;
+    
     this.signupService.selected = 1;
     this.router.navigateByUrl(`/signup/${this.token}/personal`);
   }
 
   handleSubmit() {
+    // TODO: Don't set the value if null;
+    this.signupService.goalsDetails.monthly = this.goalsForm.getRawValue().monthlyFormControl || 0;
+    this.signupService.goalsDetails.weekly = this.goalsForm.getRawValue().weeklyFormControl || 0;
     // POST request using form data service!
     this.signupService.postData(this.token);
   }
-
 
 }
