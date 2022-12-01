@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
  import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
@@ -48,7 +49,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
