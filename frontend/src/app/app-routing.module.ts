@@ -8,6 +8,7 @@ import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component
 import { SignInPageComponent } from './pages/sign-in-page/sign-in-page.component';
 import { PersonalComponent } from './pages/personal/personal.component';
 import { GoalsComponent } from './pages/goals/goals.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 const routes: Routes = [
   {path: 'main', component: MainPageComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
     {path: 'goals', component: GoalsComponent}
   ]},
   {path: 'signin', component: SignInPageComponent},
+  {path: 'home', component: HomePageComponent}, // TODO: Apply route guards to this route..
   {path: '', redirectTo: 'main', pathMatch: 'full'},
   {path: '**', component: NotFoundPageComponent}
 ];
