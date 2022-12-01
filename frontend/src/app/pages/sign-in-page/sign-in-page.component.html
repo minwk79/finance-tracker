@@ -2,6 +2,37 @@
   <app-logo></app-logo>
 </app-header>
 
-<main>
-  Sign in Form
+<main class="wrapper">
+  <h2>Sign in to your account</h2>
+  <form class="signinForm" [formGroup]="signinForm">
+    <mat-form-field>
+      <mat-label>Username:</mat-label>
+      <input matInput type="text" formControlName="username">
+      <mat-error *ngIf="signinForm.get('username')?.hasError('required')">
+        Username is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Password:</mat-label>
+      <input matInput type="password" formControlName="password">
+      <mat-error *ngIf="signinForm.get('password')?.hasError('required')">
+        Password is required
+      </mat-error>
+      <mat-error *ngIf="signinForm.get('password')?.hasError('minlength')">
+        Password must have at least 4 characters
+      </mat-error>
+    </mat-form-field>
+
+    <div class="signinOptions">
+      <!-- TODO: Select 'remember me' -->
+      <mat-checkbox>remember me!</mat-checkbox>
+      <!-- TODO: 'forgot password' link -->
+      <a href="/">forgot password?</a>
+    </div>
+    
+    <button mat-raised-button (click)="signin()" [disabled]="!signinForm.valid">Sign in</button>
+
+  </form>
+
 </main>

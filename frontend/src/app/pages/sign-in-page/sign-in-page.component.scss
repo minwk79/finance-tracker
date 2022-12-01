@@ -1,0 +1,35 @@
+.wrapper {
+  width: 50%;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  border: 2px solid black;
+
+  .signinForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    .signinOptions {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: start;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    button {
+      float: right;
+      align-self:flex-end;
+      margin-right: 3rem;
+    }
+  }
+
+}
+
