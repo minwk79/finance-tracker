@@ -17,6 +17,20 @@ main {
 .signupForm {
   grid-area: form;
   background-color: #bbaacc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.formInfo {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  & > button {
+    bottom: 0.5rem;
+  }
 }
 
 .header-text {

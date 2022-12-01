@@ -12,7 +12,7 @@ import { RegisterService } from 'src/app/services/register.service';
 export class MainPageComponent implements OnInit {
 
   signupForm = new FormGroup({
-    signupEmail: new FormControl('', Validators.required)
+    signupEmail: new FormControl('')
   })
 
   constructor(private registerService: RegisterService) { }
@@ -21,7 +21,12 @@ export class MainPageComponent implements OnInit {
   }
 
   generateEmail() {
+    // check if signupEmail is empty
     const email = this.signupForm.getRawValue().signupEmail;
+
+    if (email === '') {
+      return window.alert('Please enter email address!');
+    }
 
     this.registerService.register({email}).subscribe((res: any) => {
         window.alert(`Registration email has been sent to ${email}`);

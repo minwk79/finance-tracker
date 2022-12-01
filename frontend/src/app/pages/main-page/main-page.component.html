@@ -16,11 +16,15 @@
     </aside>
 
     <form class="signupForm" [formGroup]="signupForm" (ngSubmit)="generateEmail()">
-      <div>
-        <label for="signupEmail"><h2>Start using tracker now!</h2></label>
+      <h2>Start using tracker now!</h2>
+      <div class="formInfo">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" id="signupEmail" name="signupEmail" formControlName="signupEmail">
+        </mat-form-field>
+        <button mat-raised-button color="primary">Sign up Now!</button>
       </div>
-      <input type="email" id="signupEmail" name="signupEmail" formControlName="signupEmail" required>
-      <button mat-raised-button color="primary">Sign up Now!</button>
+      
     </form>
   </section>
 </main>
