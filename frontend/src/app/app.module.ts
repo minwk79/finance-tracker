@@ -24,6 +24,7 @@ import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component
 import { SignInPageComponent } from './pages/sign-in-page/sign-in-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     SignInPageComponent,
     HeaderComponent,
     NavbarComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
