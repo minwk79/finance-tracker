@@ -3,7 +3,6 @@ import {FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, V
 
 import { RegisterService } from 'src/app/services/register.service';
 import { SignUpService } from 'src/app/services/sign-up.service';
-import { PersonalDetails } from 'src/app/models/personal-details';
 import { Router } from '@angular/router';
 
 import { MyErrorStateMatcher } from '../../validators/check-password-validator.directive';
@@ -15,10 +14,8 @@ import { MyErrorStateMatcher } from '../../validators/check-password-validator.d
 })
 export class PersonalComponent implements OnInit {
 
-  personalDetails !: PersonalDetails;
   token !: string;
   email !: string;
-  confirmPassword = '';
   hidwPW = true;
   hideConfirmPW = true;
 
@@ -31,9 +28,9 @@ export class PersonalComponent implements OnInit {
 
 
   personalForm = new FormGroup({
-    usernameFormControl: new FormControl('', Validators.required),
-    passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    confirmFormControl: new FormControl(''),
+    usernameFormControl: new FormControl(this.signupService.personalDetails.username, Validators.required),
+    passwordFormControl: new FormControl(this.signupService.personalDetails.password, [Validators.required, Validators.minLength(4)]),
+    confirmFormControl: new FormControl(this.signupService.personalDetails.password),  // '' (Re-type password) or this.signupService.personalDetails.password (password pre-fileed)
   }, {
     validators: this.checkPasswordValidator
   }
@@ -45,7 +42,6 @@ export class PersonalComponent implements OnInit {
     public registerService: RegisterService,
     private signupService: SignUpService,
     private router: Router) { 
-      this.personalDetails = this.signupService.personalDetails;
     }
 
   ngOnInit(): void {
@@ -55,8 +51,9 @@ export class PersonalComponent implements OnInit {
   }
 
   next() {
-    // TODO: Compare password and confirm-password
-
+    // TODO: update singleton service value (email, password, username)
+    this.signupService.personalDetails.username = this.personalForm.getRawValue().usernameFormControl || '';
+    this.signupService.personalDetails.password = this.personalForm.getRawValue().passwordFormControl || '';
 
     // routerLink to 'address'
     this.signupService.selected = 2;
