@@ -13,12 +13,22 @@
 <ng-template #elseBlock>
   <main class="wrapper">
     <!-- Stepper -->
+    <div class="stepInfo">
+      <div *ngIf="signupService.selected === 1; else elseBlock">
+        <h2>Step 1</h2>
+        <p>Enter your personal information here</p>
+      </div>
+      <ng-template #elseBlock>
+        <h2>Step 2</h2>
+        <p>Set your Monthly and Weekly financial goals</p>
+      </ng-template>
+    </div>
     <ol class="stepper">
-      <li class="stepper-item">
+      <li class="stepper-item selected" [ngClass]="signupService.selected === 1 ? 'filled bigText' : ''">
         <h3 class="stepper-title">Personal Info</h3>
         <!-- <p class="stepper-text">Some desc text</p> -->
       </li>
-      <li class="stepper-item">
+      <li class="stepper-item" [ngClass]="signupService.selected === 2 ? 'selected bigText' : ''">
         <h3 class="stepper-title">Goals</h3>
         <!-- <p class="stepper-text">Some desc text</p> -->
       </li>
