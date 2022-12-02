@@ -10,8 +10,11 @@ export class AuthService {
   constructor(private jwtHelper: JwtHelperService) { }
 
   isAuthenticated(): boolean {
-    const token = JSON.parse(localStorage.getItem('user') || '')?.token;
-    return !this.jwtHelper.isTokenExpired(token);
+    if (localStorage.getItem('user')) {
+      const token = JSON.parse(localStorage.getItem('user') || '')?.token;
+      return !this.jwtHelper.isTokenExpired(token);
+    }
+    return false; 
   }
 
   registerTokenAuthenticated(token: string) {
