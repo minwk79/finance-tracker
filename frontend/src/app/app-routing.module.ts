@@ -9,6 +9,10 @@ import { SignInPageComponent } from './pages/sign-in-page/sign-in-page.component
 import { PersonalComponent } from './pages/personal/personal.component';
 import { GoalsComponent } from './pages/goals/goals.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { SpendingsPageComponent } from './pages/spendings-page/spendings-page.component';
+import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
+
+import { AuthGuardService as AuthGuard } from './guards/auth-guard.service';
 
 const routes: Routes = [
   {path: 'main', component: MainPageComponent},
@@ -18,7 +22,9 @@ const routes: Routes = [
     {path: 'goals', component: GoalsComponent}
   ]},
   {path: 'signin', component: SignInPageComponent},
-  {path: 'home', component: HomePageComponent}, // TODO: Apply route guards to this route..
+  {path: 'home', component: HomePageComponent, canActivate: [AuthGuard]},
+  {path: 'spendings', component: SpendingsPageComponent, canActivate: [AuthGuard]},
+  {path: 'settings', component: SettingsPageComponent, canActivate: [AuthGuard]},
   {path: '', redirectTo: 'main', pathMatch: 'full'},
   {path: '**', component: NotFoundPageComponent}
 ];
