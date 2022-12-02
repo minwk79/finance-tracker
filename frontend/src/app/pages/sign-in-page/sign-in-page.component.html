@@ -2,37 +2,50 @@
   <app-logo></app-logo>
 </app-header>
 
-<main class="wrapper">
-  <h2>Sign in to your account</h2>
-  <form class="signinForm" [formGroup]="signinForm">
-    <mat-form-field>
-      <mat-label>Username:</mat-label>
-      <input matInput type="text" formControlName="username">
-      <mat-error *ngIf="signinForm.get('username')?.hasError('required')">
-        Username is required
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Password:</mat-label>
-      <input matInput type="password" formControlName="password">
-      <mat-error *ngIf="signinForm.get('password')?.hasError('required')">
-        Password is required
-      </mat-error>
-      <mat-error *ngIf="signinForm.get('password')?.hasError('minlength')">
-        Password must have at least 4 characters
-      </mat-error>
-    </mat-form-field>
-
-    <div class="signinOptions">
-      <!-- TODO: Select 'remember me' -->
-      <mat-checkbox>remember me!</mat-checkbox>
-      <!-- TODO: 'forgot password' link -->
-      <a href="/">forgot password?</a>
+<main>
+  <div class="wrapper">
+    <h2>Sign in to your account</h2>
+    
+    <div [ngClass]="error === null ? 'default' : (error ? 'error' : 'noError')" style="color: red;">
+      <h3>Invalid Credential. Please try again.</h3>
     </div>
     
-    <button mat-raised-button (click)="signin()" [disabled]="!signinForm.valid">Sign in</button>
+    <form class="signinForm" [formGroup]="signinForm">
+      <mat-form-field [style.width.%]="60">
+        <mat-label>Username:</mat-label>
+        <input matInput type="text" formControlName="username">
+        <mat-error *ngIf="signinForm.get('username')?.hasError('required')">
+          Username is required
+        </mat-error>
+      </mat-form-field>
 
-  </form>
+      <mat-form-field [style.width.%]="60">
+        <mat-label>Password:</mat-label>
+        <input matInput [type]="hidePW ? 'password' : 'text'" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hidePW = !hidePW" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePW">
+          <mat-icon>{{hidePW ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="signinForm.get('password')?.hasError('required')">
+          Password is required
+        </mat-error>
+        <mat-error *ngIf="signinForm.get('password')?.hasError('minlength')">
+          Password must have at least 4 characters
+        </mat-error>
+      </mat-form-field>
+
+      <div class="signinOptions" [style.width.%]="60">
+        <!-- TODO: Select 'remember me' -->
+        <mat-checkbox (click)="toggleRememberMe()" formControlName="rememberMe">remember me!</mat-checkbox>
+        <!-- TODO: 'forgot password' link -->
+        <a href="/">forgot password?</a>
+      </div>
+      
+      <button mat-raised-button (click)="signin()" [disabled]="!signinForm.valid">Sign in</button>
+
+    </form>
+  </div>
+  <div class="linkToSignUp">
+    Or sign up with your email <a routerLink="/main">here!</a>
+  </div>
 
 </main>

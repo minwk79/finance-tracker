@@ -1,35 +1,78 @@
-.wrapper {
-  width: 50%;
-  margin: 0 auto;
-  padding: 2rem;
+main {
   text-align: center;
-  border: 2px solid black;
 
-  .signinForm {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
+  .linkToSignUp {
+    margin-top: 1rem;
+  }
 
-    .signinOptions {
+  .wrapper {
+    width: 50%;
+    margin: 0 auto;
+    padding: 2rem;
+    border: 2px solid black;
+
+    .default {
+      opacity: 0;
+    }
+
+    .noError {
+      // visibility: hidden;
+      animation: fadeOut ease 1s;
+      animation-fill-mode: forwards
+    }
+
+    .error {
+      // visibility: visible;
+      animation: fadeIn ease 1s;
+      animation-fill-mode: forwards;
+    }
+
+    .signinForm {
       display: flex;
-      flex-flow: row wrap;
-      justify-content: start;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      gap: 3rem;
+      gap: 2rem;
+
+
+      .signinOptions {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: -2.5rem;
+        // gap: 3rem;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      button {
+        float: right;
+        align-self:flex-end;
+        margin-right: 3rem;
+      }
     }
 
-    a {
-      text-decoration: none;
-    }
-
-    button {
-      float: right;
-      align-self:flex-end;
-      margin-right: 3rem;
-    }
   }
 
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
