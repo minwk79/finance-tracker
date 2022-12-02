@@ -10,8 +10,7 @@
       <button mat-raised-button class="btn" (click)="gotoSignIn()">Sign In</button>
     </div>
     <div *ngIf="showSignout">
-      <button mat-raised-button class="btn">Sign Out</button>
-      <!-- TODO: Logout user and remove from localStorage -->
+      <button mat-raised-button class="btn" (click)="signout()">Sign Out</button>
     </div>
   </div>
 </header>

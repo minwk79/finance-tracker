@@ -21,4 +21,9 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/signin');
   }
 
+  signout() {
+    window.localStorage.removeItem('user');
+    this.router.navigateByUrl('/signin');
+  }
+
 }
