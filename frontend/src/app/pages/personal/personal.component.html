@@ -16,9 +16,9 @@
 
   <mat-form-field>
     <mat-label>Password:</mat-label>
-    <input matInput placeholder="Enter Password" [type]="hidwPW ? 'password' : 'text'" id="password" name="password" formControlName="passwordFormControl">
-    <button mat-icon-button matSuffix (click)="hidwPW = !hidwPW" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidwPW">
-      <mat-icon>{{hidwPW ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <input matInput placeholder="Enter Password" [type]="hidePW ? 'password' : 'text'" id="password" name="password" formControlName="passwordFormControl">
+    <button mat-icon-button matSuffix (click)="hidePW = !hidePW" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePW">
+      <mat-icon>{{hidePW ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
     <mat-error *ngIf="personalForm.get('passwordFormControl')?.hasError('required')">
       Password is <strong>required</strong>

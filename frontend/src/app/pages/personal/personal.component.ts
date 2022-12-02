@@ -16,7 +16,7 @@ export class PersonalComponent implements OnInit {
 
   token !: string;
   email !: string;
-  hidwPW = true;
+  hidePW = true;
   hideConfirmPW = true;
 
   // ref: https://stackoverflow.com/questions/51605737/confirm-password-validation-in-angular-6
