@@ -27,6 +27,8 @@ import { SignInPageComponent } from './pages/sign-in-page/sign-in-page.component
 import { HeaderComponent } from './components/header/header.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { SpendingsPageComponent } from './pages/spendings-page/spendings-page.component';
+import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     HeaderComponent,
     NavbarComponent,
     HomePageComponent,
+    SpendingsPageComponent,
+    SettingsPageComponent,
   ],
   imports: [
     BrowserModule,
