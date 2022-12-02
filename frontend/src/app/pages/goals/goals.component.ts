@@ -5,6 +5,9 @@ import { RegisterService } from 'src/app/services/register.service';
 import { Router } from '@angular/router';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { catchError, Observable, of } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-goals',
@@ -27,7 +30,8 @@ export class GoalsComponent implements OnInit {
   constructor(
     private signupService: SignUpService,
     private registerService: RegisterService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { 
   }
 
@@ -36,20 +40,46 @@ export class GoalsComponent implements OnInit {
   }
 
   handlePrevClick() {
-    // TODO: Don't set the value if null;
-    this.signupService.goalsDetails.monthly = this.goalsForm.getRawValue().monthlyFormControl || 0;
-    this.signupService.goalsDetails.weekly = this.goalsForm.getRawValue().weeklyFormControl || 0;
+    let monthly = this.goalsForm.getRawValue().monthlyFormControl ?? 0;
+    let weekly = this.goalsForm.getRawValue().weeklyFormControl ?? 0;
+    if (monthly) {
+      this.signupService.goalsDetails.monthly = monthly;
+    }
+    if (weekly) {
+      this.signupService.goalsDetails.weekly = weekly;
+    }
     
     this.signupService.selected = 1;
     this.router.navigateByUrl(`/signup/${this.token}/personal`);
   }
 
   handleSubmit() {
-    // TODO: Don't set the value if null;
     this.signupService.goalsDetails.monthly = this.goalsForm.getRawValue().monthlyFormControl || 0;
     this.signupService.goalsDetails.weekly = this.goalsForm.getRawValue().weeklyFormControl || 0;
-    // POST request using form data service!
-    this.signupService.postData(this.token);
+
+    this.signupService.signupPersonal()
+      .pipe(catchError((error: any, caught: Observable<any>): Observable<any> => {
+          this.router.navigateByUrl(`/signup/${this.token}/personal`);
+          // notify user: duplicate username
+          window.alert('Duplicate Username!');
+          return of();
+      }))
+      .subscribe(user => {
+        // PATCH request with goal details.
+        let payload = {
+          ...this.signupService.goalsDetails,
+          user: user.id.toString()
+        }
+        this.signupService.signupGoals(payload, user.goal)
+          .subscribe(goal => {
+            // upon successful sign up, navigate to login page..
+            // window.localStorage.removeItem('email');
+            this.router.navigateByUrl('/signin');
+            // snack bar here? or in signin page.. (first load)
+            this.snackBar.open('Sign Up Complete!', 'dismiss', { duration: 3000 });
+          })
+      })
+
   }
 
 }
