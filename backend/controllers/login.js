@@ -6,7 +6,7 @@ const config = require('../utils/config');
 
 loginRouter.post('/', async (req, res, next) => {
   try {
-    const {username, password} = req.body;
+    const {username, password, rememberMe} = req.body;
     // check for username
     const userExists = await User.findOne({username});
     if (!userExists) {
@@ -23,8 +23,7 @@ loginRouter.post('/', async (req, res, next) => {
       username, 
       id: userExists._id
     }
-    const token = jwt.sign(payload, config.JWT_KEY);
-    // {expiresIn: 3600}
+    const token = rememberMe ? jwt.sign(payload, config.JWT_KEY) : jwt.sign(payload, config.JWT_KEY, {expiresIn: '3h'});
     res.status(200).json({...userExists.toObject(), token})
     // ref: https://stackoverflow.com/questions/48014504/es6-spread-operator-mongoose-result-copy
   } catch (error) {
