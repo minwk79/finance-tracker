@@ -29,6 +29,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SpendingsPageComponent } from './pages/spendings-page/spendings-page.component';
 import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
+import { MonthComponent } from './components/month/month.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { SettingsPageComponent } from './pages/settings-page/settings-page.compo
     HomePageComponent,
     SpendingsPageComponent,
     SettingsPageComponent,
+    MonthComponent,
   ],
   imports: [
     BrowserModule,
