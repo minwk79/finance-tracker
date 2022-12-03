@@ -12,9 +12,9 @@ const spendingSchema = new Schema({
       'housing', 
       'transportation', 
       'food', 
-      'insurance-health', 
-      'saving', 
-      'personal-spending'
+      'healthcare', 
+      'savings', 
+      'personal'
     ]
   },
   details: {
