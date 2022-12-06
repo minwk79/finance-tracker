@@ -12,18 +12,10 @@
 
 
 <!-- TODO: Gauge Bar -->
+<app-gauge-bar></app-gauge-bar>
 <!-- TODO: Add Spending Button -->
+<app-add-spending></app-add-spending>
 
+<!-- TODO: Spending List -->
+<app-spending-list [spendings]="currentSpendings"></app-spending-list>
 
-<!-- TODO: Spending List Component, Input: currentSpendings. Can be something like example below.. -->
-
-<div *ngIf="currentSpendings.length;else elseBlock">
-  <div *ngFor="let spending of currentSpendings">
-    <p>id: {{spending}}</p>
-  </div>
-</div>
-
-
-<ng-template #elseBlock>
-  <h2>You do not have any spending for this month...</h2>
-</ng-template>
