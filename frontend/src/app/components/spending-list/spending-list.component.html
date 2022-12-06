@@ -1,0 +1,9 @@
+<div *ngIf="spendings.length;else elseBlock">
+  <div *ngFor="let spending of spendings">
+    <p>id: {{spending}}</p>
+  </div>
+</div>
+
+<ng-template #elseBlock>
+  <h2>You do not have any spending for this month...</h2>
+</ng-template>
