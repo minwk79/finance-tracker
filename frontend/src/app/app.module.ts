@@ -30,6 +30,9 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SpendingsPageComponent } from './pages/spendings-page/spendings-page.component';
 import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 import { MonthComponent } from './components/month/month.component';
+import { SpendingListComponent } from './components/spending-list/spending-list.component';
+import { GaugeBarComponent } from './components/gauge-bar/gauge-bar.component';
+import { AddSpendingComponent } from './components/add-spending/add-spending.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,9 @@ import { MonthComponent } from './components/month/month.component';
     SpendingsPageComponent,
     SettingsPageComponent,
     MonthComponent,
+    SpendingListComponent,
+    GaugeBarComponent,
+    AddSpendingComponent,
   ],
   imports: [
     BrowserModule,
