@@ -1,11 +1,11 @@
 
 
 <div class="monthHeader">
-  <button mat-icon-button (click)="prevMonth()">
+  <button mat-icon-button (click)="prevMonth()" [disabled]="!hasPrevMonth">
     <mat-icon class="arrow-icon">arrow_back</mat-icon>
   </button>
-  <h2>{{ currentMonth }}</h2>
-  <button mat-icon-button (click)="nextMonth()">
+  <h2>{{ currentMonth | date: 'MMMM y'}}</h2>
+  <button mat-icon-button (click)="nextMonth()" [disabled]="!hasNextMonth">
     <mat-icon class="arrow-icon">arrow_forward</mat-icon>
   </button>
 </div>
