@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TrackersService } from 'src/app/services/trackers.service';
+import { GoalsService } from 'src/app/services/goals.service';
+import { SpendingsService } from 'src/app/services/spendings.service';
 
 @Component({
   selector: 'app-month',
@@ -9,26 +11,54 @@ import { TrackersService } from 'src/app/services/trackers.service';
 })
 export class MonthComponent implements OnInit {
 
+  actualMonth !: string;
   currentMonth!: string;
-  currentSpendings: any[] = [];
+  currentSpendings: string[] = [];
+
+  userMonthlyGoal!: number;
+  spendingList!: any[];
+  sumOfSpendings!: number;
+
 
   trackers!: any[];
-  availableMonths!: any[];
+  availableMonths!: string[];
 
   hasPrevMonth !: boolean;
   hasNextMonth !: boolean;
 
+  userId!: string;
+  goalId !: string;
+
+  isCurrentMonth!: boolean;
 
   constructor(
-    private trackersService: TrackersService
+    private trackersService: TrackersService,
+    private goalsService: GoalsService,
+    private spendingsService: SpendingsService
   ) { }
 
   ngOnInit(): void {
-    // display current month 
-    this.currentMonth = new Date().toISOString().split('T')[0].substring(0, 7);
+    // store user id
+    const user = JSON.parse(window.localStorage.getItem('user') || '');
 
-    const userId = JSON.parse(window.localStorage.getItem('user') || '')?._id;
-    this.trackersService.getTrackersByUser(userId).subscribe((trackers: any) => {
+    this.userId = user?._id;
+    this.goalId = user?.goal;
+
+    // set user monthly goal
+    this.goalsService.getGoalById(this.goalId).subscribe((goal: any) => {
+      this.userMonthlyGoal = goal.monthly;
+    });
+
+    // display current month 
+    this.actualMonth = new Date().toISOString().split('T')[0].substring(0, 7);
+    this.currentMonth = this.actualMonth;
+    this.isCurrentMonth = true;
+
+    console.log('current month:', this.currentMonth);
+    console.log('actual month:', this.actualMonth);
+    console.log('is it current month?', this.isCurrentMonth );
+
+    this.trackersService.getTrackersByUser(this.userId).subscribe((trackers: any) => {
       this.trackers = trackers;
       this.availableMonths = trackers.map((tracker: any) => tracker.month).sort((dateA: string, dateB: string) => {
         const [yearA, monthA] = dateA.split('-');
@@ -44,7 +74,6 @@ export class MonthComponent implements OnInit {
       if (!this.availableMonths.includes(this.currentMonth)) {
         this.availableMonths.push(this.currentMonth);
       }
-      console.log('available', this.availableMonths);
 
       // set the prev, next buttons appropriately.
       this.hasPrevMonth = this.availableMonths.indexOf(this.currentMonth) >= 1 ? true : false; 
@@ -52,6 +81,16 @@ export class MonthComponent implements OnInit {
 
       // set the current month's spending, [] if not available.
       this.currentSpendings = trackers.find((tracker: any) => tracker.month === this.currentMonth)?.spendings ?? [];
+
+      this.spendingList = []; 
+      this.sumOfSpendings = 0;
+      this.currentSpendings.map((spendingId: string) => {
+        this.spendingsService.getSpendingById(spendingId)
+          .subscribe((spending:any) => {
+            this.sumOfSpendings += spending?.amount;
+            this.spendingList.push(spending);
+          })
+      })
 
     })
   }
@@ -65,10 +104,22 @@ export class MonthComponent implements OnInit {
     if (curMonthIdx >= 1) {
       // can go to prev.
       this.currentMonth = this.availableMonths[curMonthIdx-1];
+      this.isCurrentMonth = this.currentMonth === this.actualMonth;
       this.currentSpendings = this.trackers.find((tracker: any) => tracker.month === this.currentMonth)?.spendings ?? [];
 
       this.hasNextMonth = true;
       this.hasPrevMonth = this.availableMonths.indexOf(this.currentMonth) >= 1 ? true : false; 
+
+      // update spending list and sum of spendings
+      this.spendingList = []; 
+      this.sumOfSpendings = 0;
+      this.currentSpendings.map((spendingId: string) => {
+        this.spendingsService.getSpendingById(spendingId)
+          .subscribe((spending: any) => {
+            this.sumOfSpendings += spending?.amount;
+            this.spendingList.push(spending);
+          })
+      })
     }
   }
 
@@ -77,33 +128,23 @@ export class MonthComponent implements OnInit {
     if (this.availableMonths[curMonthIdx+1]) {
       // can go next
       this.currentMonth = this.availableMonths[curMonthIdx+1];
+      this.isCurrentMonth = this.currentMonth === this.actualMonth;
       this.currentSpendings = this.trackers.find((tracker: any) => tracker.month === this.currentMonth)?.spendings ?? [];
+    
+      this.hasPrevMonth = true;
+      this.hasNextMonth = this.availableMonths[this.availableMonths.indexOf(this.currentMonth)+1] ? true : false;
+
+      // update spending list and sum of spendings
+      this.spendingList = []; 
+      this.sumOfSpendings = 0;
+      this.currentSpendings.map((spendingId: string) => {
+        this.spendingsService.getSpendingById(spendingId)
+          .subscribe((spending: any) => {
+            this.sumOfSpendings += spending?.amount;
+            this.spendingList.push(spending);
+          })
+      })
     } 
-    this.hasPrevMonth = true;
-    this.hasNextMonth = this.availableMonths[this.availableMonths.indexOf(this.currentMonth)+1] ? true : false;
   }
-
-  // prevMonth() {
-  //   let [year, month] = this.currentMonth.split('-');
-  //   if (month === '01') {
-  //     year = (Number(year) - 1).toString();
-  //     month = '12';
-  //   } else {
-  //     month = (Number(month)- 1 ).toString();
-  //   }
-  //   let prevMonth = `${year}-${month}`
-  //   console.log('prev month is', prevMonth);
-  // }
-
-  // nextMonth() {
-  //   let [year, month] = this.currentMonth.split('-');
-  //   if (month === '12') {
-  //     year = (Number(year) + 1).toString();
-  //     month = '01';
-  //   } else {
-  //     month = (Number(month) + 1).toString();
-  //   }
-  //   let nextMonth = `${year}-${month}`
-  //   console.log('next month is', nextMonth);  }
-
+  
 }
