@@ -1,6 +1,7 @@
-<div *ngIf="spendings.length;else elseBlock">
-  <div *ngFor="let spending of spendings">
-    <p>id: {{spending}}</p>
+<div *ngIf="spendingList?.length;else elseBlock">
+  <div *ngFor="let spending of spendingList">
+    <h3>title: {{spending?.title}}</h3>
+    <p>amount: {{spending?.amount}}</p>
   </div>
 </div>
 

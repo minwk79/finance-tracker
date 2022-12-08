@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SpendingListComponent implements OnInit {
 
-  @Input() spendings!: any[];
+  @Input() spendingList!: any[];
 
   constructor() { }
 
