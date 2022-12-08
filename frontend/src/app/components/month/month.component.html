@@ -12,10 +12,10 @@
 
 
 <!-- TODO: Gauge Bar -->
-<app-gauge-bar></app-gauge-bar>
+<app-gauge-bar [monthly]="userMonthlyGoal" [sum]="sumOfSpendings" [isCurrentMonth]="isCurrentMonth"></app-gauge-bar>
 <!-- TODO: Add Spending Button -->
 <app-add-spending></app-add-spending>
 
 <!-- TODO: Spending List -->
-<app-spending-list [spendings]="currentSpendings"></app-spending-list>
+<app-spending-list [spendingList]="spendingList"></app-spending-list>
 
